@@ -1,0 +1,19 @@
+query = ws* sexps ws*
+sexps = lparen? ws* expr ws* bool ws* expr ws* rparen? | expr
+
+expr = lparen ws* expr ws* rparen | lparen ws* operation ws* rparen | operation | value 
+operation = value ws+ operator ws+ value
+
+operator = ltgt
+ltgt = '>=' | '<=' | '>' | '<'  
+
+bool = 'and' | 'or'
+
+value = string | var | integer
+integer = #'[0-9]+'
+string = <'"'> #'[^\"]+' <'"'>
+var = #'[a-zA-Z\+-]([0-9a-zA-Z\+-]*)'
+
+<lparen> = <"(">
+<rparen> = <")">
+<ws> = <#'[ \t\n,]+'>
