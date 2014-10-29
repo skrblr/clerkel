@@ -1,13 +1,25 @@
-query = ws* sexps ws*
-sexps = lparen? ws* expr ws* bool ws* expr ws* rparen? | expr
+query = ws* expr ws*
 
-expr = lparen ws* expr ws* rparen | lparen ws* operation ws* rparen | operation | value 
-operation = value ws+ operator ws+ value
+expr = not ws* expr
+		 | lparen ws* expr ws* rparen 
+		 | expr ws* bool ws* expr
+		 | expr ws* bool ws* oper
+		 | oper ws* bool ws* expr
+		 | oper ws* bool ws* oper
+		 | oper
 
-operator = ltgt
+oper = value ws* eq ws* value
+		 | value ws* ltgt ws* value
+		 | value ws* contains ws* value
+		 | value ws* like ws* value
+		 | value 
+
+eq = '=' | '<>'
 ltgt = '>=' | '<=' | '>' | '<'  
-
 bool = 'and' | 'or'
+not = 'not'
+contains = 'contains'
+like = 'like'
 
 value = string | var | integer
 integer = #'[0-9]+'

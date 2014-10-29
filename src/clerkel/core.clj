@@ -1,7 +1,8 @@
 (ns clerkel.core
   (:require [instaparse.core :as insta]
             [clojure.string :as str]
-            [clojure.test :as test])
+            [clojure.test :as test]
+            [clojure.pprint :as p])
   (:gen-class :main true))
 
 (load "operators")
@@ -25,4 +26,4 @@
 
 (defn parseit
   [input] 
-  (parser input))
+  (p/pprint (parser input)))
