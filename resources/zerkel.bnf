@@ -5,7 +5,6 @@ expr = not ws* expr
 		 | expr ws* bool ws* expr
 		 | expr ws* bool ws* oper
 		 | oper ws* bool ws* expr
-		 | oper ws* bool ws* oper
 		 | oper
 
 oper = value ws* eq ws* value
